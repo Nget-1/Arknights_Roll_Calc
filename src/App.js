@@ -49,7 +49,7 @@ class OrundumInput extends React.Component {
       <fieldset>
         <legend>Enter amount of held orundum</legend>
         <input value={orundum}
-               onChange={this.handleOrundumChange}></input>
+               onChange={this.handleChange}></input>
       </fieldset>
 
     );
@@ -72,7 +72,7 @@ class OriginiumInput extends React.Component {
       <><fieldset>
         <legend>Enter amount of held originium</legend>
         <input value={originium}
-          onChange={this.handleOriginiumChange}></input>
+          onChange={this.handleChange}></input>
       </fieldset>
       </>
     );
@@ -97,7 +97,7 @@ class TensInput extends React.Component {
       <fieldset>
         <legend>Enter amount of held ten-pull tickets.</legend>
         <input value={tens}
-               onChange={this.handleTensChange}></input>
+               onChange={this.handleChange}></input>
       </fieldset>
 
     );
@@ -119,7 +119,7 @@ class CurrencyInput extends React.Component {
     const scale = this.props.scale;
     return (
       <fieldset>
-        <legend>Enter amount of {scale}:</legend>
+        <legend>Enter amount of held {scale}:</legend>
         <input value={input}
                onChange={this.handleChange} />
       </fieldset>
@@ -153,11 +153,12 @@ class Calculator extends React.Component{
     const originium = this.state.originium;
     const orundum = this.state.orundum;
     const tens = this.state.tens;
-
+    const rolls = Math.round(addUp(originium, orundum, tens) * 10)/10;
+    const percentage = Math.round(rolls/3);
 
     return(
       <div>
-        <CurrencyInput
+        {/* <CurrencyInput
           scale="orundum"
           input={orundum}
           onInputChange={this.handleOrundumChange}
@@ -173,9 +174,24 @@ class Calculator extends React.Component{
           scale="ten-pull tickets"
           input={tens}
           onInputChange={this.handleTensChange}
+        /> */}
+
+        <OrundumInput
+          input={orundum}
+          onInputChange={this.handleOrundumChange}
         />
 
-        <h1>You have { addUp(originium, orundum, tens)} rolls.</h1>
+        <OriginiumInput 
+          input={originium}
+          onInputChange={this.handleOriginiumChange}
+        />
+
+        <TensInput
+        input={tens}
+        onInputChange={this.handleTensChange}
+        />
+
+        <h1  style={{color: 'white'}}>You have { rolls } rolls, which is {percentage}% of a spark.</h1>
       </div>
     )
   }
