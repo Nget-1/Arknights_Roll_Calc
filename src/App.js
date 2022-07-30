@@ -1,6 +1,6 @@
 import logo from './logo.svg';
-import './App.css';
 import React from 'react';
+import styles from './App.css';
 
 function tenToOne(tickets) {
   return (tickets * 10);
@@ -31,6 +31,8 @@ function addUp(originium, orundum, tens) {
 
   return ten + orundums + originiums;
 }
+
+
 
 class OrundumInput extends React.Component {
   constructor(props) {
@@ -149,6 +151,7 @@ class Calculator extends React.Component{
     this.setState({tens: tens});
   }
 
+
   render(){
     const originium = this.state.originium;
     const orundum = this.state.orundum;
@@ -157,42 +160,35 @@ class Calculator extends React.Component{
     const percentage = Math.round(rolls/3);
 
     return(
-      <div>
-        {/* <CurrencyInput
-          scale="orundum"
-          input={orundum}
-          onInputChange={this.handleOrundumChange}
-        />
+      <><div className="Overall-div"><div className="Left-div">
 
-        <CurrencyInput
-          scale="originium"
-          input={originium}
-          onInputChange={this.handleOriginiumChange}
-        />
-
-        <CurrencyInput
-          scale="ten-pull tickets"
-          input={tens}
-          onInputChange={this.handleTensChange}
-        /> */}
 
         <OrundumInput
           input={orundum}
-          onInputChange={this.handleOrundumChange}
-        />
+          onInputChange={this.handleOrundumChange} />
+      </div><div className="Center-div">
 
-        <OriginiumInput 
-          input={originium}
-          onInputChange={this.handleOriginiumChange}
-        />
+          <OriginiumInput
+            input={originium}
+            onInputChange={this.handleOriginiumChange} />
+      </div><div className="Right-div">
 
-        <TensInput
-        input={tens}
-        onInputChange={this.handleTensChange}
-        />
+          <TensInput
+            input={tens}
+            onInputChange={this.handleTensChange} />
+      </div><div className="Left-div">
 
-        <h1  style={{color: 'white'}}>You have { rolls } rolls, which is {percentage}% of a spark.</h1>
-      </div>
+          <fieldset>
+            <legend>Rolls</legend>
+            <input value={rolls} />
+          </fieldset>
+      </div><div className="Center-div">
+
+          <fieldset>
+            <legend>Spark Percentage</legend>
+            <input value={percentage + '%'} />
+          </fieldset>
+        </div></div></>
     )
   }
 }
